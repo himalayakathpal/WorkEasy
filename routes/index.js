@@ -8,5 +8,7 @@ console.log('router loaded');
 
 router.get('/', homeController.home);
 router.use('/users', require('./users'));
-
+router.use('/boards', require('./boards'));
+router.use('/lists', require('./lists'));
+router.use('/cards', require('./cards'));
 module.exports = router;

@@ -1,34 +1,61 @@
 <header id="layout-header">
-    <nav>
-        <div class="mini-logo">
-            <p>
-                <a href='/'>
-                    WorkEasy
-                </a>
-            </p>
-        </div>
-    
-        <div class="auth-links">
-            <ul>
-                <% if (locals.user){ %>
-                <li>
-                    <a href="/users/profile/<%= user._id %>"><%= user.name %></a>
-                </li>
-                <li>
-                    <a href="/users/sign-out">Sign Out</a>
-                </li>
-                <% }else{ %>
-                <li>
-                    <a href="/users/sign-in">Sign In</a>
-                </li>
-                <li>
-                    <a href="/users/sign-up">Sign Up</a>
-                </li>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <a class="navbar-brand" href="#">WorkEasy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+            <% if (locals.user){ %>
+
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/profile/<%= user._id %>"><%= user.name %> <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/users/sign-out">Sign Out</a>
+                  </li>
+                  <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Board
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <% for(i of boards){
+                            if(locals.user.id == i.user._id){ %>
+                      <a class="dropdown-item" href="/boards/<%= i._id %>"><%= i.title %></a>
+                      <% }} %>  
+                    </div>
+                  </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="/boards/create" method="POST">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Enter Board Name" aria-label="Search" name="title">
+                    <button class="btn  bg-white my-2 my-sm-0" type="submit">+</button>
+                  </form>
+
+
+            <% }else{ %>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="/users/sign-in">Sign In <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/users/sign-up">Sign Up</a>
+                  </li>
+                </ul>
+
+
         
                 <% } %>
-            </ul>
+
+
+          
         </div>
-    </nav>
+      </nav>
+
+    
  
 
 

@@ -1,14 +1,15 @@
 
 const User = require('../models/user');
-
+const Board = require('../models/board');
 
 
 module.exports.home = async function(req, res){
 
     try{
-
+        let boards = await Board.find({}).populate('user').populate({path:'lists'});
         return res.render('home', {
-            title: "WorkEasy | Home"
+            title: "WorkEasy | Home",
+            boards: boards
         });
 
     }catch(err){
