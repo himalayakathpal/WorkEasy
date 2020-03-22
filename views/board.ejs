@@ -1,34 +1,54 @@
+<link rel="stylesheet" href="/css/board.css">
+
 <% if(locals.user){ %>
 
-
+    <div id="add-list-form">
       <form action="/lists/create" method="POST">
-        <input type="text" name="title">
-        <input type="hidden" name="board" value="<%= board._id%>" >
-        <button type="submit">Add List</button>
+        <input type="text" name="title" placeholder="Enter List Name" required>
+        <input  type="hidden" name="board" value="<%= board._id%>" >
+        <button type="submit">+</button>
     </form>
-    
-    <ul>
+</div>
+<div id="lists-container">
+
         <% for(i of lists){ %>
+            <div class="list">
     
-    <li><p><%= i.title %></p></li>
-    <form action="/cards/create" method="POST">
-        <input type="text" name="title">
+        <p class="list-title"><%= i.title %></p>
+           
+        <form action="/cards/create" method="POST">
+            <div>
+                <label>Title </label>&emsp;&emsp;&emsp;&nbsp;
+        <input type="text" name="title" placeholder="Enter Card Title">
+    </div>
         <input type="hidden" name="list" value="<%= i._id%>" >
+    <div>
+        <label>Due Date </label>&emsp;
         <input type="date" name="date">
+    </div>
         <button type="submit">Add Card</button>
     </form>
+
     <% for(c of i.cards){ %>
-        <li>
-            <p><%= c.title %></p>
-            <p><%= c.dueDate.toDateString() %></p>
-        </li>
-    
+        <div class="card">
+            <p class="card-title"><%= c.title %></p>
+            <p class="due-date"><% if(!c.dueDate){ %><% }else{ %> <%= c.dueDate.toDateString() %><% } %></p>
+            <form action="/cards/add-attachment/<%= c._id %>" enctype="multipart/form-data" method="POST">
+                <input type="file" name="attachment" placeholder="Profile Picture">
+                <button type="submit">
+                    Add Attachment
+                </button>
+            </form>
+            <% if(!c.attachment){ %><% }else{ %> <img src="<%= c.attachment %>" class="card-attachment" width="50"><% } %>
+        </div>
+   
         <% } %>
+    
+</div>
     <% } %>
-    </ul>
 
  <% }%>
 
-
+</div>
 
 

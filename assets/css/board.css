@@ -1,0 +1,29 @@
+main {
+  padding: 30px;
+  height: 100%;
+  background-color: #1aa2b8; }
+  main #add-list-form {
+    margin-left: 40%; }
+  main #lists-container {
+    display: flex; }
+    main #lists-container .list {
+      margin: 20px;
+      background-color: white;
+      text-align: center;
+      width: 400px; }
+      main #lists-container .list input {
+        width: 200px;
+        border-radius: 1px; }
+      main #lists-container .list .list-title {
+        color: #1aa2b8;
+        font-size: 20px;
+        font-weight: bold; }
+      main #lists-container .list .card {
+        background-color: lightgray; }
+        main #lists-container .list .card .due-date {
+          color: red; }
+        main #lists-container .list .card .card-title {
+          color: #1aa2b8;
+          font-weight: bold; }
+        main #lists-container .list .card .card-attachment {
+          margin-left: 170px; }

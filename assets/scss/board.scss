@@ -1,0 +1,40 @@
+main{
+    padding:30px;
+    height:100%;
+    background-color: #1aa2b8;
+    #add-list-form{
+        margin-left:40%;
+    }
+    #lists-container{
+        display:flex;
+        
+        .list{
+            margin:20px;
+            background-color:white;
+            text-align: center;
+            width:400px;
+            input{
+                width:200px;
+                border-radius:1px;
+            }
+            .list-title{
+                color:#1aa2b8;
+                font-size:20px;
+                font-weight: bold;
+            }
+            .card{
+                background-color:lightgray;
+                .due-date{
+                    color:red;
+                }
+                .card-title{
+                    color:#1aa2b8;
+                    font-weight: bold;
+                }
+                .card-attachment{
+                    margin-left:170px;
+                }
+            }
+        }
+    }
+}

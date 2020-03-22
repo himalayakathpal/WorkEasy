@@ -58,7 +58,7 @@ app.use(session({
         }
     )
 }));
-
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(passport.initialize());
 app.use(passport.session());
 
