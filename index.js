@@ -5,6 +5,9 @@ const port = 8000;
 const db = require('./config/mongoose');
 const expressLayouts = require('express-ejs-layouts');
 const cookieParser = require('cookie-parser');
+const env = require('./config/environment');
+const logger = require('morgan');
+
 
 const session = require('express-session');
 const passport = require('passport');
@@ -16,17 +19,19 @@ const MongoStore = require('connect-mongo')(session);
 
 const sassMiddleware = require('node-sass-middleware');
 
-app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
-    debug: true,
-    outputStyle: 'extended',
-    prefix: '/css'
-}));
 
+
+if (env.name == 'development'){
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',
+        prefix: '/css'
+    }));
+}
 
 app.use(express.urlencoded({extended:false}));
-
 
 app.use(express.static('./assets'));
 
@@ -41,7 +46,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(session({
     name: 'workeasy',
     // TODO change the secret before deployment in production mode
-    secret:'blahblah',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {
