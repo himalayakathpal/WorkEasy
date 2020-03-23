@@ -8,7 +8,7 @@ const env = require('./environment');
 passport.use(new googleStrategy({
     clientID: env.google_client_id,
         clientSecret: env.google_client_secret,
-        callbackURL: "http://localhost:8000/users/auth/google/callback"
+        callbackURL: "http://34.238.170.63/users/auth/google/callback"
     },
 
     function(accessToken, refreshToken, profile, done){
